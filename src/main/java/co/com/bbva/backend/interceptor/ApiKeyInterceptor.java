@@ -3,6 +3,7 @@ package co.com.bbva.backend.interceptor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import co.com.bbva.backend.util.ApiKeyValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -13,15 +14,8 @@ public class ApiKeyInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		try {
-			System.out.println("1 - preHandle() : Before sending request to the Controller");
-			System.out.println("Method Type: " + request.getMethod());
-			System.out.println("Request URL: " + request.getRequestURI());
 			String apiKey = request.getHeader("api-key");
-			System.out.println("apiKey: " + apiKey);
-			System.out.println("Headers del Request:");
-			request.getHeaderNames().asIterator().forEachRemaining(headerName -> {
-				System.out.println(headerName + ": " + request.getHeader(headerName));
-			});
+			ApiKeyValidator.validate(apiKey);
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			response.getWriter().write("Unauthorized: Invalid API Key");

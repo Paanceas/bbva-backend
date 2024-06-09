@@ -12,6 +12,7 @@ import co.com.bbva.backend.dto.ConversionResponse;
 import co.com.bbva.backend.service.CurrencyConversionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/currency-conversion")
@@ -24,7 +25,7 @@ public class CurrencyConversionController {
 	@PostMapping
 	@ApiKeyRequired
 	@Operation(summary = "Convert currency", description = "Converts an amount from one currency to another")
-	public ConversionResponse convertCurrency(@RequestBody ConversionRequest request) {
+	public ConversionResponse convertCurrency(@RequestBody @Valid ConversionRequest request) {
 		return currencyConversionService.convertCurrency(request);
 	}
 }
