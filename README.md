@@ -24,10 +24,20 @@ Este proyecto consiste en un microservicio para la conversión de divisas utiliz
    En el directorio `src/main/resources`, edita el archivo `application.properties` para incluir tu clave API:
 
    ```properties
-   api.key=tu_api_key_aqui
    external.api.url=http://api.exchangeratesapi.io/v1/latest
-   external.api.symbols.url=http://api.exchangeratesapi.io/v1/symbols
+   external.api.key=tu_external_api_key_aqui
+   api.key=your_api_key_here
    ```
+3. **Puedes configurar tus cors si asi lo prefieres:**
+
+   En el directorio `src/main/resources`, edita el archivo `application.properties`:
+   ```properties
+   cors.allowed.origins=http://localhost:4200
+   cors.allowed.methods=GET,POST,PUT,DELETE,OPTIONS
+   cors.allowed.headers=*
+   cors.allow.credentials=true
+   ```
+  
 
 ## Estructura del Proyecto
 
@@ -92,25 +102,27 @@ El proyecto utiliza las siguientes dependencias:
 
 ```xml
 <dependencies>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-validation</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-ui</artifactId>
-        <version>1.6.13</version>
-    </dependency>
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
-    </dependency>
-</dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+	</dependencies>
 ```
 
 ## Documentación con Swagger
@@ -134,3 +146,9 @@ Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 ## Licencia
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+### AUTOR
+
+Este proyecto ha sido desarrollado por **Pablo Ceballos**.
+
+* Puedes encontrar mas repositorios del autor en GitHub siguiendo [este enlace](https://github.com/Paanceas).
