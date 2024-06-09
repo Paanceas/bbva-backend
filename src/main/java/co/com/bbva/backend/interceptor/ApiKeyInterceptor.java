@@ -17,7 +17,8 @@ public class ApiKeyInterceptor implements HandlerInterceptor {
 			System.out.println("1 - preHandle() : Before sending request to the Controller");
 			System.out.println("Method Type: " + request.getMethod());
 			System.out.println("Request URL: " + request.getRequestURI());
-			String apiKey = request.getHeader("API-KEY");
+			String apiKey = request.getHeader("api-key");
+			System.out.println("apiKey: " + apiKey);
 			ApiKeyValidator.validate(apiKey);
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
