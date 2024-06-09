@@ -19,6 +19,10 @@ public class ApiKeyInterceptor implements HandlerInterceptor {
 			System.out.println("Request URL: " + request.getRequestURI());
 			String apiKey = request.getHeader("api-key");
 			System.out.println("apiKey: " + apiKey);
+			System.out.println("Headers del Request:");
+	        request.getHeaderNames().asIterator().forEachRemaining(headerName -> {
+	            System.out.println(headerName + ": " + request.getHeader(headerName));
+	        });
 			ApiKeyValidator.validate(apiKey);
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
