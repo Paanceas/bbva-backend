@@ -52,6 +52,20 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6A4F8039711C44FB8B0D227CADAA5238 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6C64F9A07D9B4C0992A746531CD7CE22 }}
 
+      - name: Set environment variables
+        run: |
+          az webapp config appsettings set --name 'bbva-backend' --resource-group 'your-resource-group-name' --settings \
+          spring.application.name=bbva-backend \
+          external.api.url=http://api.exchangeratesapi.io/v1/latest \
+          external.api.key=cb04a89f0eab8bb575f8290db749d965 \
+          api.key=your_api_key_here \
+          springdoc.api-docs.path=/api-docs \
+          springdoc.swagger-ui.path=/swagger-ui.html \
+          cors.allowed.origins=http://localhost:4200 \
+          cors.allowed.methods=GET,POST,PUT,DELETE,OPTIONS \
+          cors.allowed.headers=* \
+          cors.allow.credentials=true
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -59,4 +73,3 @@ jobs:
           app-name: 'bbva-backend'
           slot-name: 'Production'
           package: '*.jar'
-          
