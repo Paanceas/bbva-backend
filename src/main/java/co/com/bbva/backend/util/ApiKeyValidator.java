@@ -16,7 +16,7 @@ public class ApiKeyValidator {
 	}
 
 	public static void validate(String apiKey) {
-		if (!validApiKey.equals(apiKey)) {
+		if (validApiKey == null || !validApiKey.equals(apiKey)) {
 			throw new CurrencyNotFoundException("Invalid API Key");
 		}
 	}
